@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+
 
 class UserController extends Controller
 {
@@ -30,10 +34,24 @@ class UserController extends Controller
       $user->surname = $surname;
       $user->nick = $nick;
       $user->email = $email;
+      //Upload image
+      $image_path = $request->file('image_path');
+      if($image_path){
+        //Unique name
+        $image_path_name = time().$image_path->getClientOriginalName();
+        //Save file on disk 'user'
+        Storage::disk('users')->put($image_path_name, File::get($image_path));
+        //Set name image in objet user
+        $user->image = $image_path_name;
+      }
       $user->update();
       return redirect()->route('config')
                       ->with(['message'=>'Se actualizo el usuario correctamente']);
 
-
+    }
+    public function getImage($filename)
+    {
+      $file = Storage::disk('users')->get($filename);
+      return new Response($file,200);
     }
 }
