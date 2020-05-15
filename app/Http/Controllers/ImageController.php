@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use App\Image;
@@ -37,6 +38,16 @@ class ImageController extends Controller
     }
     $image->save();
     return redirect()->route('home')->with(['message'=> 'La imagen ha sido subida correctamente']);
+  }
+  public function getImage($filename){
+    $file = Storage::disk('images')->get($filename);
+    return new Response($file, 200);
+  }
+  public function detail($id){
+    $image = Image::find($id);
+    return view('image.detail',[
+      'image'=>$image
+    ]);
   }
 
 
