@@ -36,11 +36,16 @@
                   <div class="comments">
                     <h4>Comentarios({{count($image->comments)}})</h2>
                     <hr>
-                    <form action="" method="post">
+                    <form action="{{route('comment.save')}}" method="post">
                       @csrf
-                      <input type="hidden" name="image_id" value="{{$image->id}}">
+                      <input type="hidden" name="image_id" value="{{$image->id}}" required>
                       <p>
-                        <textarea class="form-control" name="content" required></textarea>
+                        <textarea class="form-control {{$errors->has('content') ? 'is-invalid' : ''}}" name="content" required></textarea>
+                        @if($errors->has('content'))
+                          <span class="invalid-feeback" role="alert">
+                            <strong>{{$errors->first('content')}}</strong>
+                          </span>
+                        @endif
                       </p>
                       <button type="submit" class="btn btn-success">comentar</button>
                     </form>

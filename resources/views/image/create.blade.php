@@ -15,9 +15,9 @@
                 <div class="form-group row">
                   <label class="col-md-3 col-form-label text-md-right" for="image_path">Imagen</label>
                   <div class="col-md-7">
-                    <input id="image_path" type="file" name="image_path" class="form-control" required>
+                    <input id="image_path" type="file" name="image_path" class="form-control {{$errors->has('image_path') ? 'is-invalid' : ''}}" >
                     @if($errors->has('image_path'))
-                      <span class="invalid-feedback" role="alert">
+                      <span class="invalid-feeback" role="alert">
                         <strong>{{$errors->first('image_path')}}</strong>
                       </span>
                     @endif
@@ -26,7 +26,7 @@
                 <div class="form-group row">
                   <label class="col-md-3 col-form-label text-md-right" for="description">Descripción</label>
                   <div class="col-md-7">
-                    <textarea id="description" name="description" class="form-control" required></textarea>
+                    <textarea id="description" name="description" class="form-control {{$errors->has('description') ? 'is-invalid' : ''}}" ></textarea>
                     @if($errors->has('description'))
                       <span class="invalid-feedback" role="alert">
                         <strong>{{$errors->first('description')}}</strong>
