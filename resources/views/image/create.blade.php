@@ -17,7 +17,7 @@
                   <div class="col-md-7">
                     <input id="image_path" type="file" name="image_path" class="form-control {{$errors->has('image_path') ? 'is-invalid' : ''}}" >
                     @if($errors->has('image_path'))
-                      <span class="invalid-feeback" role="alert">
+                      <span class="invalid-feedback" role="alert">
                         <strong>{{$errors->first('image_path')}}</strong>
                       </span>
                     @endif

@@ -12,7 +12,7 @@ class Comment extends Model
     return $this->belongsTo('App\User','user_id');
   }
   //Relacion de muchos a uno
-  public function images(){
+  public function image(){
     return $this->belongsTo('App\Image','image_id');
   }
 }

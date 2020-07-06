@@ -54,10 +54,13 @@ form .avatar{
   margin-top: 0px;
   margin-left: 0px;
 }
-.pub_image .comments{
+.pub_image_detail .comments{
   padding: 20px;
 }
-
+.number-likes{
+  color: gray;
+  font-size: 11px;
+}
 
 .likes{
   float: left;
