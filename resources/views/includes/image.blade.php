@@ -1,12 +1,12 @@
 <div class="card pub_image">
     <div class="card-header">
       @if($image->user->image)
-      <div class="container-avatar">
-        <img src="{{route('user.avatar',['filename'=>$image->user->image]) }}" class="avatar">
-      </div>
+        <div class="container-avatar">
+          <img src="{{route('user.avatar',['filename'=>$image->user->image]) }}" class="avatar">
+        </div>
       @endif
       <div class="data-user">
-        <a href="{{route('image.detail',['id'=>$image->id])}}">
+        <a href="{{route('profile', ['id'=>$image->user->id])}}">
           {{$image->user->name.' '.$image->user->surname}}
           <span class="nickname">{{' | @'.$image->user->nick}}</span>
         </a>
@@ -20,7 +20,7 @@
       </div>
       <div class="description">
         <span class="nickname">{{'@'.$image->user->nick}}</span>
-        <span class="nickname">{{' | '.\FormatTime::LongTimeFilter($image->created_at)}}</span>
+        <span class="nickname date">{{' | '.\FormatTime::LongTimeFilter($image->created_at)}}</span>
         <p>{{$image->description}}</p>
       </div>
       <div class="likes">
@@ -39,7 +39,7 @@
 
       </div>
       <div class="comments">
-        <a href="" class="btn btn-sm btn-warning btn-comments">
+        <a href="{{route('image.detail',['id'=>$image->id])}}" class="btn btn-sm btn-warning btn-comments">
           Comentarios({{count($image->comments)}})
         </a>
       </div>
