@@ -58,6 +58,9 @@
                             <a class="nav-link" href="{{route('likes')}}">Me gustan</a>
                           </li>
                           <li class="nav-item">
+                            <a class="nav-link" href="{{route('user.index')}}">Personas</a>
+                          </li>
+                          <li class="nav-item">
                             <a class="nav-link" href="{{route('image.create')}}">Subir imagen</a>
                           </li>
                           <li>

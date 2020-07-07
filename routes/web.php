@@ -14,20 +14,31 @@
 Route::get('/', function () {
     return view('index');
 });
-
+//GENERAL
 Auth::routes();
-
 Route::get('/', 'HomeController@index')->name('home');
+
+//USER
 Route::get('/configuracion', 'UserController@config')->name('config');
 Route::get('/user/avatar/{filename}', 'UserController@getImage')->name('user.avatar');
 Route::post('/user/update', 'UserController@update')->name('user.update');
+Route::get('/people/{search?}', 'UserController@index')->name('user.index');
+Route::get('/profile/{id}' , 'UserController@profile')->name('profile');
+
+//IMAGE
 Route::get('/subir-imagen', 'ImageController@create')->name('image.create');
 Route::post('/image/save', 'ImageController@save')->name('image.save');
 Route::get('/image/file/{filename}', 'ImageController@getImage')->name('image.file');
 Route::get('/imagen/{id}', 'ImageController@detail')->name('image.detail');
+Route::get('/imagen/delete/{id}', 'ImageController@delete')->name('image.delete');
+Route::get('/imagen/editar/{id}', 'ImageController@edit')->name('image.edit');
+Route::post('/image/update', 'ImageController@update')->name('image.update');
+
+//COMMENT
 Route::post('/comment/save', 'CommentController@save')->name('comment.save');
 Route::get('/comment/delete/{id}', 'CommentController@delete')->name('comment.delete');
+
+//LIKE
 Route::get('/like/{image_id}', 'LikeController@like')->name('like.save');
 Route::get('/dislike/{image_id}', 'LikeController@dislike')->name('like.delete');
 Route::get('/likes' , 'LikeController@index')->name('likes');
-Route::get('/profile/{id}' , 'UserController@profile')->name('profile');

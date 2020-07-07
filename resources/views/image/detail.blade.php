@@ -44,6 +44,43 @@
                     <span class="number-likes">{{count($image->likes)}}</span>
 
                   </div>
+                  @if(Auth::user() && (Auth::user()->id == $image->user->id))
+                    <div class="actions">
+                      <a href="{{route('image.edit', ['id' => $image->id])}}" class="btn btn-sm btn-primary">Editar</a>
+
+                      <!-- Button to Open the Modal -->
+                      <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#myModal">
+                        Eliminar
+                      </button>
+
+                      <!-- The Modal -->
+                      <div class="modal" id="myModal">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                              <h4 class="modal-title">Eliminar mi foto</h4>
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                              ¿Esta de acuerdo con eliminar esta imagen?
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-primary" data-dismiss="modal">Lo pensaré</button>
+                              <a href="{{ route('image.delete', ['id' => $image->id]) }}" class="btn btn-danger">Si, claro</a>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  @endif
+
                   <div class="clearfix"></div>
                   <div class="comments">
                     <h4>Comentarios({{count($image->comments)}})</h2>
@@ -64,7 +101,6 @@
                     <hr>
                     @foreach($image->comments as $comment)
                       <div class="comment">
-
                           <span class="nickname">{{'@'.$comment->user->nick}}</span>
                           <span class="nickname date">{{' | '.\FormatTime::LongTimeFilter($comment->created_at)}}</span>
 
